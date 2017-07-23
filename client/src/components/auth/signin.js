@@ -9,14 +9,8 @@ import formTextComponent from '../util/formTextComponent';
 import * as actions from '../../actions';
 
 class Signin extends Component{
-	constructor(){
-		super();
-		this.state = {
-
-		}
-	}
 	handleFormSubmit(formProps){
-		console.log(formProps);
+		this.props.signup(formProps);
 	}
 
 	render(){

@@ -9,8 +9,7 @@ import formTextComponent from '../util/formTextComponent';
 
 class Signup extends Component{
 	handleFormSubmit(formData){
-		console.log(formData);
-		//this.props.signup(formData);
+		this.props.signup(formData);
 	}
 
 	render(){
