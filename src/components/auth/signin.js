@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form';
+import {connect} from 'react-redux';
 
 import {Form, FormGroup, Col, ControlLabel, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import TextField from '../util/textfield';
+import formTextComponent from '../util/formTextComponent';
+
+import * as actions from '../../actions';
 
 class Signin extends Component{
 	constructor(){
@@ -12,8 +15,8 @@ class Signin extends Component{
 
 		}
 	}
-	handleFormSubmit({username,password}){
-		console.log(username, password);
+	handleFormSubmit(formProps){
+		console.log(formProps);
 	}
 
 	render(){
@@ -23,14 +26,8 @@ class Signin extends Component{
 				<Col sm={10} smOffset={1}>
 					<h3>Sign in</h3>
 					<Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-						<FormGroup className="formItem">
-							<ControlLabel>Username:</ControlLabel>
-							<Field name="username" component={TextField} />
-						</FormGroup>
-						<FormGroup className="formItem">
-							<ControlLabel>Password:</ControlLabel>
-							<Field name="password" type="password" component={TextField} />
-						</FormGroup>
+						<Field name="username" text="Username" component={formTextComponent} />
+						<Field name="password" text="Password" type="password" component={formTextComponent} />
 						<FormGroup>
 							<Col xs={3} sm={3} className="formItem">
 								<Button type="submit">
@@ -52,7 +49,10 @@ class Signin extends Component{
 function mapStateToProps(state){
 	return {errorMessage: state.auth.error};
 }
+
+Signin = connect(mapStateToProps, actions)(Signin);
+
 export default reduxForm({
 	form: 'signin',
 	fields: ['username','password']
-}, mapStateToProps)(Signin);
+})(Signin);

@@ -1,19 +1,16 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 import {Form, FormGroup, Col, ControlLabel, Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
-import TextField from '../util/textfield';
+import formTextComponent from '../util/formTextComponent';
 
 class Signup extends Component{
-	constructor(){
-		super();
-		this.state = {
-
-		}
-	}
-	handleFormSubmit({username,password,confpass}){
-		console.log(username, password, confpass);
+	handleFormSubmit(formData){
+		console.log(formData);
+		//this.props.signup(formData);
 	}
 
 	render(){
@@ -23,26 +20,17 @@ class Signup extends Component{
 				<Col sm={10} smOffset={1}>
 					<h3>Sign Up</h3>
 					<Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-						<FormGroup className="formItem">
-							<ControlLabel>Username:</ControlLabel>
-							<Field name="username" component={TextField} />
-						</FormGroup>
-						<FormGroup className="formItem">
-							<ControlLabel>Password:</ControlLabel>
-							<Field name="password" type="password" component={TextField} />
-						</FormGroup>
-						<FormGroup className="formItem">
-							<ControlLabel>Confirm:</ControlLabel>
-							<Field name="confpass" type="password" component={TextField} />
-						</FormGroup>
+							<Field name="username" text="Username" component={formTextComponent} />
+							<Field name="password" text="Password" type="password" component={formTextComponent} />
+							<Field name="confpass" text="Confirm Password" type="password" component={formTextComponent} />
 						<FormGroup>
 							<Col xs={3} sm={3} className="formItem">
 								<Button type="submit">
 									Sign Up
 								</Button>
 							</Col>
-								<LinkContainer className="pull-right formItem"  to="/signup">
-									<Button bsStyle="link">Create an Account</Button>
+								<LinkContainer className="pull-right formItem"  to="/signin">
+									<Button bsStyle="link">Sign in</Button>
 								</LinkContainer>
 					    </FormGroup>
 					</Form>
@@ -53,10 +41,27 @@ class Signup extends Component{
 
 }
 
+function validate(formProps){
+	var errors = {}
+	if(!formProps.username)
+		errors.username = "Please provide a username";
+	if(!formProps.password)
+		errors.password = "Please provide a password";
+	if(!formProps.confpass)
+		errors.confpass = "Please confirm your password";
+	if(formProps.password!=formProps.confpass)
+		errors.confpass = "Passwords must match";
+	return errors;
+}
+
 function mapStateToProps(state){
 	return {errorMessage: state.auth.error};
 }
+
+Signup = connect(mapStateToProps, actions)(Signup)
+
 export default reduxForm({
-	form: 'signin',
-	fields: ['username','password','confpass']
-}, mapStateToProps)(Signup);
+	form: 'signup',
+	fields: ['username','password','confpass'],
+	validate: validate
+})(Signup);
