@@ -19,19 +19,19 @@ class Signup extends Component{
 				<Col sm={10} smOffset={1}>
 					<h3>Sign Up</h3>
 					<Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-							<Field name="username" text="Username" component={formTextComponent} />
-							<Field name="password" text="Password" type="password" component={formTextComponent} />
-							<Field name="confpass" text="Confirm Password" type="password" component={formTextComponent} />
+						<Field name="username" text="Username" component={formTextComponent} />
+						<Field name="password" text="Password" type="password" component={formTextComponent} />
+						<Field name="confpass" text="Confirm Password" type="password" component={formTextComponent} />
 						<FormGroup>
 							<Col xs={3} sm={3} className="formItem">
 								<Button type="submit">
 									Sign Up
 								</Button>
 							</Col>
-								<LinkContainer className="pull-right formItem"  to="/signin">
-									<Button bsStyle="link">Sign in</Button>
-								</LinkContainer>
-					    </FormGroup>
+							<LinkContainer className="pull-right formItem"  to="/signin">
+								<Button bsStyle="link">Sign in</Button>
+							</LinkContainer>
+						</FormGroup>
 					</Form>
 				</Col>
 			</Col>

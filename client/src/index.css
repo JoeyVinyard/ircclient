@@ -5,3 +5,41 @@
 	padding-left: 0px;
 	padding-right: 0px;
 }
+.chatWindow{
+	padding: 0;
+	height: 78vh;
+	overflow-y: auto;
+	margin-bottom: 2vh;
+}
+
+.chatWindow *{
+	padding: 0;
+}
+
+.chatWindow ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.chatWindow ul li{
+	padding: 2px;
+}
+
+.chatWindow ul li:nth-child(even){
+	background-color: #EAEAEA;
+}
+
+.roomlist{
+	height: 78vh;
+	overflow-y: auto;
+	margin-bottom: 2vh;
+}
+
+.roomlist div{
+	padding:0;
+}
+.newroombutton{
+	width:100%;
+	height: 7vh;
+}
