@@ -41,5 +41,9 @@
 }
 .newroombutton{
 	width:100%;
-	height: 7vh;
+	height: 5vh;
+}
+
+.messageField *{
+	height:5vh;
 }

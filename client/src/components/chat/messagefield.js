@@ -1,15 +1,29 @@
 import React, {Component} from 'react';
-import {Field} from 'react-redux';
-import {Form, InputGroup, FormControl, Button} from 'react-bootstrap';
+import {reduxForm, Field} from 'redux-form';
+import {Form} from 'react-bootstrap';
+
+import MessageFieldInput from './messagefieldinput';
 
 class MessageField extends Component{
-	render(){
-		return(
-			<Form>
 
+	handleFormSubmit(formProps){
+		console.log(formProps);
+	}
+
+	render(){
+		const {handleSubmit, fields: {message}}=this.props;
+
+		return(
+			<Form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+				<Field component = {MessageFieldInput} name = "message"/>
 			</Form>
 		);
 	}
 }
 
-export default MessageField;
+//MessageField = connect(mapStateToProps, actions)(MessageField);
+
+export default reduxForm({
+	form: 'messagefield',
+	fields: ['message']
+})(MessageField);
